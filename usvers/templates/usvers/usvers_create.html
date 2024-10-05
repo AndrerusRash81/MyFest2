@@ -1,0 +1,45 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Добавление пользователя {% endblock %}
+
+{% block content %}
+
+     <div class="features">
+         <h3>Форма по добавлению записей</h3>
+            <form method="post" enctype="multipart/form-data">
+                 {% csrf_token %}<br>
+
+                 {{ form.name }}<br>
+                 {{ form.rol }}<br>
+                 {{ form.full_text }}<br>
+                <input type="checkbox" id={{form.activ}}>    <br>
+                <p>Выберите файл:</p><input type="file" name="myfile" value ="{{ form.infa }}"><br>
+                <p>Выберите картинку:</p><input type="file" name="mypict" value ="{{ form.cover }}"><br>
+
+                <!--<p>Выберите файл: {{ form.infa }} </p> <br>
+                <p>Выберите картинку: {{ form.cover }} </p><br>-->
+
+                <!--<label for="{{form.kesh }}">ВВедите кеш: </label>-->
+                <!--<input type="number" list="priceList" step="10" min="3000" max="100000" value="{{ form.kesh }}" id="kesh" name="kesh"/> -->
+                <input type="number" id="kesh" value ="{{ form.kesh }}">
+                <br>
+
+                 <!--<label for="{{ form.date }}">Введите дату:</label>-->
+                 <!--{{ form.date }}<br>-->
+                  <input type="datetime-local" class="form-control" id="{{ form.date }}">
+                  <br>
+
+                 <span>{{ error }}</span>
+                <br>
+
+                <button type="submit">Добавить пользователя </button>
+            </form>
+               <datalist id="priceList">
+                   <option value="15000" />
+                   <option value="20000" />
+                   <option value="25000" />
+        </datalist>
+     </div>
+
+{% endblock %}
+

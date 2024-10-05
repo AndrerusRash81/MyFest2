@@ -1,0 +1,42 @@
+﻿{% load static %}
+
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <!--<link rel = "stylesheet" href = "./pdf.css" /> -->
+
+    <meta http-equiv="Content-Type" content="text/ html; charset=utf-8"/>
+    <title>аааааа</title>
+
+    <style type="text/css">
+       @page {
+       size: A4;
+       margin: 1cm;
+         }
+      {% include './pdf.css' %}
+    </style>
+
+</head>
+
+
+
+</head>
+<body>
+<table class="list">
+    <thead>
+        <tr class="blue">
+            <th class="center"><span class="title">Ценовые</span></th>
+            <th class="lil-title center">Номер отчета:</th>
+            <th class="lil-title center">Numer :</th>
+        </tr>
+    </thead>
+      <tbody>
+         <tr class="blue">
+            <td> {{ lot }} </td>
+            <td> {{ position }} </td>
+            <td> {{ applications }} </td>
+        </tr>
+      </tbody>
+
+</table>
+</body>
+</html>

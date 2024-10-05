@@ -1,0 +1,35 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Добавление записей {% endblock %}
+
+{% block content %}
+
+     <div class="features">
+         <h3>Форма по добавлению записей</h3>
+            <form method="post">
+                 {% csrf_token %}<br>
+
+                 {{ form.title }}<br>
+                 {{ form.anons }}<br>
+                 {{ form.full_text }}<br>
+                 {{ form.status }}<br>
+                 {{ form.avtor }}<br>
+                 {{ form.date }}<br>
+                 <span>{{ error }}</span><br>
+                <p>Ошибка через валидацию</p> <br>
+                 {{ form.errors }}<br>
+
+                <!--
+                <input type="text" placeholder="Название статей" class="form-control"><br>
+                <input type="text" placeholder="Анонс статьи" class="form-control"><br>
+                <textarea class="form-control" placeholder="Текст"> </textarea><br>
+                <input type="date"  class="form-control"><br>
+                <input type="time"  class="form-control"><br>
+                 --!>
+
+                <button type="submit">Добавить статью </button>
+            </form>
+     </div>
+
+{% endblock %}
+

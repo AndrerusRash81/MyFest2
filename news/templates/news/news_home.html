@@ -1,0 +1,32 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница новостей {% endblock %}
+
+{% block content %}
+
+ <h1>НОВОСТИ!!!</h1>
+<div class="alert time">
+  <p>Время конца:{{Time}} </p>
+  <p id="timer">Время по Джава </p>
+
+  <a href="{% url 'news_taimer' %}" class="btn btn-warning">Запуск таймера Питона на 15 секунд</a>
+    <!--ДЛя запуска джава скрипта???-->
+  <a href="#" onclick="currentTime()">Кликни здесь для запуска таймера через джава!</a>
+  <button onclick="myfunct()">--Джава  скрипт запуск привета--</button>
+  <button onclick="doSomethingCool()">--Джава  скрипт запуска таймера через Wiwer!-</button>
+
+</div>
+   {% for el in news %}
+      <div class="alert alert-warning">
+          <h3>{{ el.title }}</h3>
+          <p>{{ el.anons }}</p>
+          <p>{{ el.full_text }}</p>
+           <p>{{ el.status }}</p>
+           <p>{{ el.avtor }}</p>
+          <a href="{% url 'news-detail' el.id %}" class="btn btn-warning">Читать детально</a>
+      </div>
+   {% endfor %}
+
+
+{% endblock %}
+

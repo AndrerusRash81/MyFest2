@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} {{new_article.title}} {% endblock %}
+
+{% block content %}
+
+      <div class="features_2">
+          <h10>{{ new_article.title }}</h10>
+          <h1>{{ new_article.date }}</h1>
+          <p>{{ new_article.full_text }}</p>
+          <a href="{% url 'news-delete' new_article.id %}" class="btn btn-danger">Удалить</a>
+          <a href="{% url 'news-update' new_article.id %}" class="btn btn-info">Редактировать</a>
+      </div>
+
+{% endblock %}
+

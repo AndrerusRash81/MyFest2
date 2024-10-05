@@ -1,0 +1,17 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Главная страница новостей {% endblock %}
+
+{% block content %}
+
+ <h1>НОВОСТИ TABLES!!!</h1>
+
+
+
+    {% load django_tables2 %}
+    {% render_table table %}
+
+
+
+
+{% endblock %}

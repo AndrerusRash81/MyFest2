@@ -1,0 +1,167 @@
+body {
+ background: #e2f50f;
+}
+
+aside {
+   float:left;
+   background: #0f851a;
+   width: 20%;
+   padding: 2.5%;
+   height: 100%;
+   color: #0f851a;
+   border-right: 5px  solid #4d4d4d;
+}
+
+
+
+aside  .logoPict {
+  width: 15em;
+  border: 1px solid #333;
+  box-shadow: 8px 8px 5px #444;
+  padding: 8px 12px;
+}
+
+aside .logo {
+  width: 80px ;
+  font-size: 30px;
+  margin-left: 10px;
+  font-weight: bold;
+  position: relative;
+  Top: -5px;
+  color: #fff;
+}
+
+aside h3 {
+ margin-top: 50px;
+ font-size: 28px;
+ color: #fff;
+}
+
+aside ul {list-style: none}
+
+aside ul li {
+ color: #fff;
+ display: block;
+ margin-top: 20px;
+ transition: transform .6s ease;
+}
+
+aside ul li:hover, aside ul a:hover{
+ color: #FF0000;
+ text-decoration: none;
+ transform: scale(1.10);
+}
+
+main .features {
+  float: left;
+  color: #008080;
+  text-align: center;
+  //width: 20%;
+}
+
+main .features h1 {font-size: 20px;}
+
+main  h1 {
+ color: #8B0000;
+ text-align: center;
+}
+
+main  p {
+ color: #8B0000;
+ text-align: center;
+}
+
+main  table {
+ color: #yellow;
+ text-align: center;
+ font-size: 40px;
+}
+
+ .alert-warning {
+   float: left;
+  // clear: both;
+   width: 400px;
+   margin: 20px 34%
+   color: #008080;
+   text-align: center;
+}
+
+ .time {
+   float: left;
+   margin: 20px 34%
+   color: #008080;
+   text-align: left;
+   width: 80%;
+   height: 20%;
+}
+
+//detail_views
+
+news .features_2 {
+   color: #00FA9A;
+   text-align: center;
+   font-size: 50px;
+}
+
+.sidebar-nav {
+   border-collapse: collapse;
+   width: 70%;
+   padding: 2.5%;
+   background: #ff00ff;
+}
+
+.Protext_my {
+   border-collapse: collapse;
+   width: 20%;
+   padding: 2.5%;
+   background: #ff00ff;
+}
+
+form {
+ margin-lefr:32%;
+ width:200px;
+ margin-top:50px;
+
+}
+
+
+
+th {
+  text-align: center;
+  padding: 5px;
+  border: 3px solid rgb(43, 129, 17);
+  word-wrap:break-word;
+  font-size: 30px;
+ }
+
+ td {
+  text-align: left;
+  padding: 15px;
+  border: 3px solid rgb(43, 129, 17);
+  word-wrap:break-word;
+   font-size: 20px;
+}
+
+ thead th:nth-child(1) {
+  width: 30%;
+}
+
+ .table_my {
+   table-layout: fixed;
+   border-collapse: collapse;
+   width: 80%;
+   padding: 2.5%;
+   background: #ff00ff;
+}
+
+
+caption {
+  font-family: "Rock Salt", cursive;
+  padding: 20px;
+  font-style: italic;
+  caption-side: top;
+  color: #666;
+  text-align: center;
+  letter-spacing: 1px;
+}
+

@@ -1,0 +1,109 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %} Записи пользователей {% endblock %}
+
+<!--{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message|safe }}
+                <a href="#" class="close">✖</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}-->
+
+
+{% block content %}
+{% load us_tags %}
+<img  src= "wRYFkX4.jpg"  alt="{{ i.cover.url }}" width="200" height="100" style="vertical-align:bottom">
+
+    <!--<py-script>
+        print('Hello, World!')
+    </py-script>-->
+
+    <table class="table_my">
+       <caption>{% get_stroky %}-- {% get_stroky 333 %}</caption>
+       <caption>Список пользователей</caption>
+        <!--<input type="text" id="myInput" onkeyup="window.location='{% url 'usvers_home' %}'" placeholder="Поиск имен..">
+        <button onclick="window.location='{% url 'usvers_home'  %}'" >Ввести</button>-->
+        <!--Запись в файл текста со страницы -->
+        <form action="{% url 'usver_data' %}" method="post">
+            {% csrf_token %}
+            <p><textarea  name="myInputData" ></textarea></p>
+            <p><button type="submit" >Ввести TEXT</button></p>
+        </form>
+
+        <form action="{% url 'usvers_home' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="myInput" placeholder="Поиск имен..">
+            <button type="submit" >Ввести</button>
+        </form>
+
+     <thead>
+      <tr scope = "name">
+        <th>Имя пользователя</th>
+        <th>Роль</th>
+        <th>Описание</th>
+        <th>Активный</th>
+        <th>Кеш</th>
+        <th>Файл</th>
+        <th>Фото</th>
+        <th>Дата создание</th>
+        <th>Информация</th>
+        <th>Удалить</th>
+      </tr>
+     </thead>
+    <tbody>
+    {% for i in Usvers %}
+      <tr scope = "name">
+          <td>{{i.name}}</td>
+          <td>{{i.rol}}</td>
+          <td>{{i.full_text}}</td>
+          <td>{{i.activ}}</td>
+          <td>{{i.kesh}}</td>
+
+          {% if i.infa %}
+              <td><a href="us_download/{{i.infa.name}}" > {{i.infa.name}} </a> </td>
+          {% else %}
+           <td></td>
+          {% endif %}
+
+          {% if i.cover %}
+          <td><img
+                  class="fit-picture"  src= "media/{{i.cover.name}}"
+                  alt="pict"  width="80" height="100">
+              <p>media/{{i.cover.name}}</p>>
+          </td>
+          {% else %}
+           <td></td>
+          {% endif %}
+
+          <td>{{i.date}}</td>
+          <td><a href="{% url 'usvers_detail' i.id %}" class="btn btn-warning">Читать детально</a></td>
+          <td>
+            <form action="{% url 'usvers_delete'  %}" method="post">
+             {% csrf_token %}
+             <button type="submit" name="id" class="btn btn-danger" value ="{{ i.id }}" >Удалить</button>
+            </form>
+            <a href="del/{{i.id}}" class="btn btn-warning">Удалить через ссылку</a>
+          </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+          <td colspan="4">ИТОГО</td>
+          <td>{{ UsverssSum }}</td>
+    </tfoot>
+    </table>
+<p>{{ UsversMax }} {{ UsversAvg }} {{ UsversCount }}</p>
+{% endblock %}
+
+<script>
+    function mydef_DB()
+    {
+        var field_1 = document.getElementById("myInput").value;
+        print(field_1)
+        window.location.href =  "filtrmy_1/?param1=" + field_1
+    }
+</script>

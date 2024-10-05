@@ -1,0 +1,13 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+  <h1>О нас !!!</h1>
+  <p>О нас  !</p>
+    <!--ДЛя работы с Pdf???-->
+   <a href="{% url 'about_pdf'  %}">1 Кликни здесь для PDF!</a>
+   <a href="{% url 'about_write_pdf'  %}">1 Кликни здесь для записи PDF!</a>
+   <a href="{% url 'about_pdf2'  %}">2 Кликни здесь для PDF!</a>
+{% endblock %}
+
+{% block title %}О нас   {% endblock %}
+

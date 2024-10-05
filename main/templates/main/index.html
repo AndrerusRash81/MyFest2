@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+ <h1>Главная страница !!!</h1>
+  <p>Главная страница !</p>
+ {% include 'main/test.html' %}
+
+<div class="features">
+    <h1>Текст кнопки</h1>
+    <button>"На следующую страницу"</button>
+</div>
+
+<table>
+    <colgroup>
+        <col style="background-color: yellow"  width=200px/>
+        <col style="background-color: yellow"  width=100px/>
+        <col style="background-color: yellow"  width=100px/>
+    </colgroup>
+
+    <tr>
+        <th style="background-color: #fff">Animals</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+</table>
+
+<script>
+document.getElementById("demo").innerHTML = "Hello JavaScript!";
+</script>
+
+{% endblock %}
+
+{% block title %}Главная страница титла {% endblock %}
