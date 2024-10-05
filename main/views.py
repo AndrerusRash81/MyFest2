@@ -73,6 +73,7 @@ def fetch_pdf_resources(uri, rel):
         path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ''))
     else:
         path = None
+    print("--------->"+path)
     return path
 
 def link_callback(uri, _rel):
