@@ -2,12 +2,12 @@
 
 @font-face {
 	font-family: 'Times New Roman';
-	src: url("{% static 'main/fonts/TimesNewRoman.ttf' %}") format("TrueType");
+	src: url("{% static 'fonts/TimesNewRoman.ttf' %}");
 }
 
 
 body {
     font-family: 'Times New Roman', sans-serif;
-	font-size: 100px;
+	font-size: 25px;
 }
 

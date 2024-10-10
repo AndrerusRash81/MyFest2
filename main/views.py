@@ -73,7 +73,8 @@ def fetch_pdf_resources(uri, rel):
         path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ''))
     else:
         path = None
-    print("------->"+path)
+    print("------>")
+    print(path)
     return path
 
 def link_callback(uri, _rel):
@@ -110,7 +111,7 @@ def about_pdf(request):
         BytesIO(html_.encode("UTF-8")),
         dest=result,
         encoding='UTF-8',
-        link_callback=link_callback
+        link_callback=fetch_pdf_resources
     )
     #pisaStatus = pisa.pisaDocument(BytesIO(html_.encode('UTF-8')), result, encoding='utf-8',link_callback=fetch_pdf_resources)
     if pisaStatus.err:
