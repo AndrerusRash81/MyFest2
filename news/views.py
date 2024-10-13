@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Articles
 from .forms import ArticlesForms
 from django.views.generic import DetailView, UpdateView, DeleteView
+from django.conf import settings
+import os
+from django.http import FileResponse
+from django.core.files.storage import FileSystemStorage
 
 #Для таймера
 from django.utils import timezone
@@ -18,6 +22,8 @@ from django_tables2 import RequestConfig
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
+#exsel
+import openpyxl
 
 
 
@@ -122,4 +128,70 @@ def do_news_taimer(request):
         #thread.start()
 
     pass
+
+def read_save_EXSEL(request):
+    #Чтение и запись Ексель
+    file_new_path = os.path.join(settings.MEDIA_ROOT,"", "Temp3.xlsx")
+    print(file_new_path)
+    if request.method == 'POST':
+        print("--POST--")
+        if request.FILES:
+            # получаем загруженный файл
+            file = request.FILES['file']
+            print('Name:' + file.name)
+            fs = FileSystemStorage()
+            # сохраняем на файловой системе
+            filename = fs.save('Temp3.xlsx', file)
+            #print('filename:' + filename)
+            #file_new_path=fs.url(filename)
+            #print(file_new_path)
+            wb = openpyxl.load_workbook(file_new_path)
+            print(wb.sheetnames)
+            sh1 = wb['Лист1']
+            row = sh1.max_row
+            column = sh1.max_column
+            # Чтение
+            for i in range(2, row + 1):
+            # print(i.value)
+               print(f"=-=-=-Чтение строки -=-={i}")
+               print(sh1.cell(row=i, column=1).value)
+               print(sh1.cell(row=i, column=2).value)
+               print(sh1.cell(row=i, column=3).value)
+              # запись
+            for i in range(2, row + 1):
+               print(f"=-=-=-запись строки -=-={i}")
+               sh1.cell(row=i, column=1).value = "1"
+
+            wb.save(file_new_path)
+
+    else:
+            error='Ошибка формы'
+
+    return redirect('news_home')
+
+
+
+def news_save_EXSEL(request):
+    file_path = os.path.join(settings.MEDIA_ROOT,"", "Temp2.xlsx")
+    # создаем книгу
+    wb = openpyxl.Workbook()
+    # делаем единственный лист активным
+    #ws = wb.active
+    # вставить рабочий лист в конец (по умолчанию)
+    ws1 = wb.create_sheet("Mysheet")
+    # переименуем лист
+    ws1.title = "NewPage"
+    #Рабочий лист можно получить, используя его имя в качестве ключа экземпляра созданной книги Exce
+    sh1 = wb["NewPage"]
+    # удаление листов книги
+    #wb.remove(wb['NewPage'])
+
+    #запись
+    sh1.cell(row=1, column=1).value="КОД"
+    sh1.cell(row=1, column=2).value = "Артикул"
+    sh1.cell(row=1, column=3).value = "Сумма"
+
+    wb.save(file_path)
+
+    return FileResponse(open(file_path,'rb'))
 

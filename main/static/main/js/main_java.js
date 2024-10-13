@@ -5,10 +5,6 @@ function myfunct() {
 }
 
 
-function doSomethingCool(event) {
- setInterval(() => window.location.reload(true), 1000); // Просто и эффективно обновление страницы каждую 1 сек
-}
-
 
 function currentTime() {
     var date = new Date()

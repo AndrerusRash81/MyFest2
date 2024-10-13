@@ -9,6 +9,9 @@ urlpatterns = [
     path('<int:pk>/update', views.NewUpdateView.as_view(), name='news-update'),
     path('<int:pk>/delete', views.NewDeleteView.as_view(), name='news-delete'),
     path('taimer/', views.do_news_taimer, name='news_taimer'),
+    path('read_save_EXSEL', views.read_save_EXSEL, name='read_save_EXSEL'),
+    path('news_save_EXSEL', views.news_save_EXSEL, name='news_save_EXSEL'),
+
 
 
 ]

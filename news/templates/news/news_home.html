@@ -8,24 +8,33 @@
 <div class="alert time">
   <p>Время конца:{{Time}} </p>
   <p id="timer">Время по Джава </p>
+</div>
 
   <a href="{% url 'news_taimer' %}" class="btn btn-warning">Запуск таймера Питона на 15 секунд</a>
     <!--ДЛя запуска джава скрипта???-->
   <a href="#" onclick="currentTime()">Кликни здесь для запуска таймера через джава!</a>
-  <button onclick="myfunct()">--Джава  скрипт запуск привета--</button>
-  <button onclick="doSomethingCool()">--Джава  скрипт запуска таймера через Wiwer!-</button>
+  <button onclick="myfunct()">--Джава  скрипт запуск привета--</button></p>
+  <!--<a href="{% url 'read_save_EXSEL' %}" class="btn btn-warning">Чтение и запись в ЕКСЕЛЬ!</a> -->
+  <form action="read_save_EXSEL" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="file">Выбор путь к файлу для скачивания</label>
+      <input type="file"  id="file" name="file" multiple />
+      <button type="submit" >Чтение и запись в ЕКСЕЛЬ!</button>
+  </form>
+  <a href="{% url 'news_save_EXSEL' %}" class="btn btn-warning">Создание и Выгрузка в ЕКСЕЛЬ новостей!</a></p>
 
-</div>
    {% for el in news %}
       <div class="alert alert-warning">
           <h3>{{ el.title }}</h3>
           <p>{{ el.anons }}</p>
           <p>{{ el.full_text }}</p>
-           <p>{{ el.status }}</p>
-           <p>{{ el.avtor }}</p>
+          <p>{{ el.status }}</p>
+          <p>{{ el.avtor }}</p>
           <a href="{% url 'news-detail' el.id %}" class="btn btn-warning">Читать детально</a>
       </div>
    {% endfor %}
+
+
 
 
 {% endblock %}

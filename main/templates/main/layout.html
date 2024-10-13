@@ -45,7 +45,7 @@
 <!--           <a href=""><li> <i class="fa-sharp fa-solid fa-signal"></i> Контакты</li> </a>-->
        </ul>
        <ul class="sidebar-nav">
-           <!-- Блок оображения аутентификации  -->
+           <!-- Блок отображения аутентификации  -->
             {% if user.is_authenticated %}
                 <li>User: {{ user.get_username }}</li>
                 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
