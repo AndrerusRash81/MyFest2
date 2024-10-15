@@ -159,4 +159,12 @@ def about_pdf2(request):
     #   return response
     return redirect('about')
 
+#Чат чрез веб сокеты
 
+def chat(request):
+    return render(request, 'main/chat.html')
+
+def room(request, room_name):
+    return render(request, 'main/room.html', {
+        'room_name': room_name
+    })

@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +30,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
 
+# Application definition
 INSTALLED_APPS = [
+    'channels',  # для веб сокета
+   # daphne',  # ⬅ ASGI Webserver
     'news',
     'main',
     'usvers',
@@ -41,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_tables2',   #по   django-tables2
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,6 +77,34 @@ TEMPLATES = [
         },
     },
 ]
+
+
+#для веб сокета
+# Разрешенные хосты для разработки и тестов
+ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1']
+# Укажите ASGI-приложение
+ASGI_APPLICATION = "mybase.asgi.application"
+
+#REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+#REDIS_PORT = os.getenv('REDIS_PORT', '6379')
+#REDIS_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+#CHANNEL_LAYERS = {
+#    'default': {
+#        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#        'CONFIG': {
+#            "hosts": [REDIS_URL],
+#        },
+#    },
+#}
+
+# Настройка Channel Layer???
+# = {
+#    'default': {
+#        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+#    },
+#}
+
+# ---конец по веб сокетам
 
 WSGI_APPLICATION = 'mybase.wsgi.application'
 
