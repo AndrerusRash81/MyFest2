@@ -33,8 +33,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
+    #'daphne',  # ⬅ ASGI Webserver
     'channels',  # для веб сокета
-   # daphne',  # ⬅ ASGI Webserver
     'news',
     'main',
     'usvers',
@@ -85,17 +85,19 @@ ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1']
 # Укажите ASGI-приложение
 ASGI_APPLICATION = "mybase.asgi.application"
 
-#REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
-#REDIS_PORT = os.getenv('REDIS_PORT', '6379')
-#REDIS_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
-#CHANNEL_LAYERS = {
-#    'default': {
-#        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#        'CONFIG': {
-#            "hosts": [REDIS_URL],
-#        },
-#    },
-#}
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+REDIS_PORT = os.getenv('REDIS_PORT', '6379')
+REDIS_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+CHANNEL_LAYERS = {
+   'default': {
+       'BACKEND': 'channels_redis.core.RedisChannelLayer',
+       #'BACKEND': 'channels_redis.core.InMemoryChannelLayer',
+       'CONFIG': {
+       #    "hosts": [REDIS_URL],
+           "hosts": [('127.0.0.1', 6379)],
+        },
+   },
+}
 
 # Настройка Channel Layer???
 # = {

@@ -9,6 +9,8 @@ import requests
 import os
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from xhtml2pdf.files import pisaFileObject
+
 from django.conf import settings
 #from io import
 from django.contrib.staticfiles import finders
@@ -73,29 +75,29 @@ def fetch_pdf_resources(uri, rel):
         path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ''))
     else:
         path = None
-    print("------>")
-    print(path)
+
     return path
 
-def link_callback(uri, _rel):
-    result = finders.find(uri)
-    if result:
-        if not isinstance(result, (list, tuple)):
-            result = [result]
-        result = [os.path.realpath(path) for path in result]
-        path = result[0]
+def link_callback(uri, rel):
+    # use short variable names
+    sUrl = settings.STATIC_URL  # Typically /static/
+    sRoot = settings.STATIC_ROOT # Typically /home/userX/project_static/
+    mUrl = settings.MEDIA_URL  # Typically /static/media/
+    mRoot = settings.MEDIA_ROOT  # Typically /home/userX/project_static/media/
+    # convert URIs to absolute system paths
+    if uri.startswith(mUrl):
+        path = os.path.join(mRoot, uri.replace(mUrl, ""))
+    elif uri.startswith(sUrl):
+        path = os.path.join(sRoot, uri.replace(sUrl, ""))
     else:
-        sUrl = settings.STATIC_URL  # Typically /static/
-        sRoot = settings.STATIC_ROOT  # Typically /home/userX/project_static/
-        mUrl = settings.MEDIA_URL  # Typically /media/
-        mRoot = settings.MEDIA_ROOT  # Typically /home/userX/project_static/media/
+        path = uri
 
-        if uri.startswith(mUrl):
-            path = os.path.join(mRoot, uri.replace(mUrl, ""))
-        elif uri.startswith(sUrl):
-            path = os.path.join(sRoot, uri.replace(sUrl, ""))
-        else:
-            return uri
+    pisaFileObject.getNamedFile = lambda self: path
+
+    # make sure that file exists
+    if not os.path.isfile(path):
+        raise Exception('media URI must start with %s or %s' % (sUrl, mUrl))
+    return path
 
 def about_pdf(request):
     #response = HttpResponse(content_type='application/pdf')
@@ -111,7 +113,7 @@ def about_pdf(request):
         BytesIO(html_.encode("UTF-8")),
         dest=result,
         encoding='UTF-8',
-        link_callback=fetch_pdf_resources
+        link_callback=link_callback
     )
     #pisaStatus = pisa.pisaDocument(BytesIO(html_.encode('UTF-8')), result, encoding='utf-8',link_callback=fetch_pdf_resources)
     if pisaStatus.err:
@@ -130,7 +132,7 @@ def write_pdf(template_src, filename):
         html_.encode("UTF-8"),
         result,
         encoding='utf-8',
-        link_callback=fetch_pdf_resources)
+        link_callback=link_callback)
     result.close()
     if not pdf.err:
         pisa.startViewer(filename)
