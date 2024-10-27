@@ -4,7 +4,8 @@
  <h1>Чат через веб сокеты</h1>
 
     <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+    <input id="room-name-submit" type="button" value="Enter"></p>
+
 
     <script>
 
@@ -19,6 +20,8 @@
             var roomName = document.querySelector('#room-name-input').value;
             window.location.pathname = '/chat/' + roomName + '/';
         };
+
+
     </script>
 
 {% endblock %}

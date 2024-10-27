@@ -30,6 +30,7 @@
           <p>{{ el.full_text }}</p>
           <p>{{ el.status }}</p>
           <p>{{ el.avtor }}</p>
+          <p>{{ el.room }}</p>
           <a href="{% url 'news-detail' el.id %}" class="btn btn-warning">Читать детально</a>
       </div>
    {% endfor %}

@@ -4,10 +4,12 @@
 
 {% block content %}
 
-      <div class="features_2">
+<div class="features_2" xmlns="http://www.w3.org/1999/html">
           <h10>{{ new_article.title }}</h10>
           <h1>{{ new_article.date }}</h1>
           <p>{{ new_article.full_text }}</p>
+          <h1>Комната</h1>
+          <p>{{ new_article.room }}</p>
           <a href="{% url 'news-delete' new_article.id %}" class="btn btn-danger">Удалить</a>
           <a href="{% url 'news-update' new_article.id %}" class="btn btn-info">Редактировать</a>
       </div>

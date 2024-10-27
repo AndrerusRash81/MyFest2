@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 class ArticlesForms(ModelForm):
     class Meta:
         model=Articles
-        fields=['title', 'anons', 'full_text', 'date', 'avtor', 'status']
+        fields=['title', 'anons', 'full_text', 'date', 'avtor', 'status', 'room']
 
         widgets={
             "title": TextInput(attrs={

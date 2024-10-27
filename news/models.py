@@ -28,6 +28,7 @@ class Articles(models.Model):
     ]
 
     status = models.CharField(max_length=7, choices=Status_News_CHOICES, default="Netral")
+    room = models.CharField('Комната', max_length=10, null=True, blank=True)
 
     def __str__(self):
         return f'/news/{self.id}'
