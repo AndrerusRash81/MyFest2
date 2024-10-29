@@ -26,7 +26,6 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 import openpyxl
 
 
-
 @login_required
 def news_home(request):
    #delay = 5  # время между вызовами функции в секундах, в данном примере - 5 c

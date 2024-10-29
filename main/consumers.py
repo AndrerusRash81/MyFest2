@@ -48,8 +48,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
  async def my_chat_message(self, event):
         message = event['message']
-        #print("====chat_message chat=====")
-        #print(message)
+        print("====chat_message chat=====")
+        print(message)
         #Время попробуем посылать совместно с сообщениями
         today = date.today()
         # Формат dd/mm/YY

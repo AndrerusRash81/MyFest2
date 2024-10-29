@@ -23,6 +23,11 @@ from io import BytesIO
 def index(request):
       return render(request,'main/index.html')
 
+#подключаем каналы веб сокета
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+from asgiref.sync import sync_to_async
+
 
 def about(request):
  #   return HttpResponse("<h4>Проверка Работы about!!!  <h4>")
@@ -170,3 +175,19 @@ def room(request, room_name):
     return render(request, 'main/room.html', {
         'room_name': room_name
     })
+
+def chat_message(request):
+        title = "Сообщение для отправки"
+        room = "chat_123"
+        print("Отправка сообщения в комнату " + room)
+        # Отправим в комнату сообщение
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(room,
+                                                {
+                                                    'type': 'my_chat_message',
+                                                    'message': title,
+                                                }
+                                                )
+
+
+        return render(request, 'main/chat.html')

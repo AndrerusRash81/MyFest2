@@ -12,4 +12,5 @@ urlpatterns = [
     path('about_pdf', views.about_pdf, name='about_pdf'),
     path('about_write_pdf', views.about_write_pdf, name='about_write_pdf'),
     path('about_pdf2', views.about_pdf2, name='about_pdf2'),
+    path('chat_message', views.chat_message, name='chat_message'),
 ]
