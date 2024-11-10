@@ -20,13 +20,19 @@ from django.contrib.staticfiles import finders
 #from django.template.loader import render_to_string
 from io import BytesIO
 
-def index(request):
-      return render(request,'main/index.html')
 
 #подключаем каналы веб сокета
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from asgiref.sync import sync_to_async
+
+# подключим базе news
+from news.models import Articles
+
+def index(request):
+      return render(request,'main/index.html')
+
+
 
 
 def about(request):
@@ -172,9 +178,13 @@ def chat(request):
     return render(request, 'main/chat.html')
 
 def room(request, room_name):
-    return render(request, 'main/room.html', {
-        'room_name': room_name
-    })
+
+    TZArticles=Articles.objects.all()
+    data = {
+        'TZnews': TZArticles,
+        'room_name': room_name,
+    }
+    return render(request, 'main/room.html', data)
 
 def chat_message(request):
         title = "Сообщение для отправки"

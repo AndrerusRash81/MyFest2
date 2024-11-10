@@ -12,7 +12,7 @@ def new_create(sender, instance, created, **kwargs):
     if created:
         #instance: экземпляр модели  Articles, который  был  сохранен.
         title = instance.title
-        room = str(instance.room)
+        room = 'chat_%s' % str(instance.room)
         print("Отправка сообщения в комнату "+room)
         #Отправим в комнату сообщение
         channel_layer = get_channel_layer()

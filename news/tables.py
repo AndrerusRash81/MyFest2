@@ -7,6 +7,7 @@ class ArticlesTable(tables.Table):
     full_text      = tables.Column(attrs={'th':{'style':'width:20%;'}})
     date           = tables.DateTimeColumn(attrs={'th':{'style':'width:10%;'}})
     avtor          = tables.Column(attrs={'th':{'style':'width:10%;'}})
+    status         = tables.Column(attrs={'th': {'style': 'width:10%;'}})
     room           = tables.Column(attrs={'th': {'style': 'width:10%;'}})
 
     class Meta:
@@ -14,4 +15,4 @@ class ArticlesTable(tables.Table):
        # template_name = 'django_tables2/bootstrap4.html'
         attrs = {'class': 'paleblue'}
         empty_text = 'Новости через таблицу'
-        fields = ("title","full_text","date","avtor","room",)
+        fields = ("title","full_text","date","avtor","status", "room",)

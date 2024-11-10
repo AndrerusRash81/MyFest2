@@ -1,4 +1,5 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 
 {% block content %}
  <h1>Комната {{room_name}} веб сокета </h1>
@@ -7,6 +8,80 @@
     <input id="chat-message-submit" type="button" value="Send"></p>
     <input id="room-name-message-submit" type="button" value="Послать в чат сообщение">
     {{ room_name|json_script:"room-name" }}
+    <div id="chat_table">  </div>
+
+
+    <!--ДЛя запуска джава скрипта  react-dom -->
+    <script type="text/javascript" src="{% static 'main/js/libs/react/react.development.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/libs/react/react-dom.development.js' %}"></script>
+    <script src="{% static 'main/js/libs/babel.min.js' %}"></script>
+<!--    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>-->
+<!--    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>-->
+<!--    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>-->
+
+  <script type="text/babel">
+      class App extends React.Component {
+          _mounted = true;
+          loading  = false;
+          hasError = false;
+
+      constructor(props) {
+        super(props)
+        this.state = { bids: [] }
+      }
+
+     fetchData() {
+          console.log('fetching...');
+          this.loading = true;
+          fetch('/api/news/bid/')
+          .then(res => res.json())
+          .then((data) => {
+          if (this._mounted) {
+              console.log('setting data...');
+              console.log(data);
+              this.setState({ bids: data }, function () { this.render(); });
+              this.loading = false;
+           } else {
+             console.log('not mounted.');
+           }
+      })
+      .catch(err => {
+        this.hasError = true;
+        this.loading  = false;
+      })
+     }
+
+     render() {
+       return (
+         <div className="table-container">
+           {this.props.visible == 'True' && <h1>visible =True</h1>}
+           <h1>This my table {this.props.nametable} комната {this.props.room} </h1>
+                           <table  class="table_my_2">
+                           <thead>
+                           <tr scope = "name">
+                            <th>Описание</th>
+                            <th>Дата</th>
+                            <th>Автор</th>
+                            </tr>
+                            </thead>
+                           <tbody>
+
+                           </tbody>
+                           </table>
+         </div>
+       );
+
+     }
+      }
+
+    var NewsTable= ReactDOM.render(
+    <App visible='True'
+         nametable='news'
+         room='{{room_name}}' />,
+         document.getElementById('chat_table')
+     );
+  </script>
+
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
@@ -18,9 +93,15 @@
             + '/'
         );
 
-        chatSocket.onmessage = function(e) {
+     console.log("----Проверка----");
+
+
+     chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             document.querySelector('#chat-log').value += (data.message + '\n');
+        //  ReactDOM.render(element, document.getElementById('chat_table'));
+        //alert('определим ReactDOM')
+        //  NewsTable.render(element);
         };
 
         chatSocket.onclose = function(e) {
