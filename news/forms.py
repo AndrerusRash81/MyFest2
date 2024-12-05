@@ -23,7 +23,11 @@ class ArticlesForms(ModelForm):
 
             "full_text": Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Текст'})
+                'placeholder': 'Текст'}),
+
+            "room": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Комната чата'})
         }
 
     def clean_title(self):

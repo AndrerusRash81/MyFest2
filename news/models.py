@@ -12,7 +12,7 @@ class Avtor(models.Model):
 
     class Meta:
         verbose_name='Автор'
-        verbose_name_plural='Авторы '
+        verbose_name_plural='Авторы'
 
 class Articles(models.Model):
     title = models.CharField('Название', max_length=50, default='ТЕКСТ')

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
+    'rest_framework',
     #'daphne',  # ⬅ ASGI Webserver
     'channels',  # для веб сокета
     'news',
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware', # Связывает пользователей, использующих сессии, запросами.
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'rest_framework.middleware.AuthenticationMiddleware',    # rest_framework
+    # 'rest_framework.middleware.AuthorizationMiddleware',     # rest_framework
 ]
 
 ROOT_URLCONF = 'mybase.urls'

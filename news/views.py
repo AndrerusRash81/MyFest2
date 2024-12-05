@@ -25,6 +25,10 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 #exsel
 import openpyxl
 
+#Для  отправки api  в формате jsonn
+from rest_framework import generics
+from .serializers import ArticlesSerializer
+
 
 @login_required
 def news_home(request):
@@ -194,3 +198,11 @@ def news_save_EXSEL(request):
 
     return FileResponse(open(file_path,'rb'))
 
+
+class ArticlesList(generics.ListCreateAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = ArticlesSerializer
+
+class ArticlesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = Articles
